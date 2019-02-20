@@ -1,10 +1,13 @@
 package SDA;
 
+import org.apache.log4j.Logger;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SessionManager {
+    protected static final Logger logger = Logger.getLogger("Sessi onManager");
     private static SessionManager ourInstance = new SessionManager();
     private List<Client> loggerList = new ArrayList<>();
 
@@ -19,6 +22,7 @@ public class SessionManager {
         Client client  = DataBaseService.getClientByEmail(email);
         if(client.getPassword().equals(password)){
             loggerList.add(client);
+            logger.info("Zalogowany " + client);
             return true;
         }else{
             return false;
